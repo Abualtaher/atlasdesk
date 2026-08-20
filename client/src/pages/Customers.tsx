@@ -1,9 +1,34 @@
 import { useState } from "react";
+type Customer = {
+  id: number;
+  name: string;
+  email: string;
+  status: string;
+  tickets: number;
+};
 
-const customers = [
-  { id: 1, name: "Anna Svensson", email: "anna@example.com" },
-  { id: 2, name: "John Smith", email: "john@example.com" },
-  { id: 3, name: "Maria Andersson", email: "maria@example.com" },
+const customers: Customer[] = [
+  {
+    id: 1,
+    name: "Anna Svensson",
+    email: "anna@example.com",
+    status: "Active",
+    tickets: 3,
+  },
+  {
+    id: 2,
+    name: "John Smith",
+    email: "john@example.com",
+    status: "Active",
+    tickets: 1,
+  },
+  {
+    id: 3,
+    name: "Maria Andersson",
+    email: "maria@example.com",
+    status: "Inactive",
+    tickets: 5,
+  },
 ];
 
 function Customers() {
@@ -26,20 +51,27 @@ function Customers() {
         onChange={(event) => setSearch(event.target.value)}
         className="mt-6 w-full max-w-md rounded-lg border border-gray-300 bg-white px-4 py-2"
       />
-
-      <p className="mt-4 text-gray-600">You searched for: {search}</p>
-
-      <div className="mt-6 space-y-3">
-        {filteredCustomers.map((customer) => (
-          <div
-            key={customer.id}
-            className="rounded-lg border border-gray-200 bg-white p-4"
-          >
-            <p className="font-medium text-gray-900">{customer.name}</p>
-
-            <p className="text-sm text-gray-500">{customer.email}</p>
-          </div>
-        ))}
+      <div className="mt-6 overflow-hidden rounded-xl border border-gray-200 bg-white">
+        <table className=" w-full text-left">
+          <thead>
+            <tr>
+              <th className="p-4 text-sm text-gray-500">Customer</th>
+              <th className="p-4 text-sm text-gray-500">Email</th>
+              <th className="p-4 text-sm text-gray-500">Status</th>
+              <th className="p-4 text-sm text-gray-500">Tickets</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredCustomers.map((customer) => (
+              <tr key={customer.id} className="border-t border-gray-100">
+                <td className="p-4">{customer.name}</td>
+                <td className="p-4">{customer.email}</td>
+                <td className="p-4">{customer.status}</td>
+                <td className="p-4">{customer.tickets}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

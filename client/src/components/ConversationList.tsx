@@ -3,6 +3,8 @@ type Conversation = {
   customer: string;
   message: string;
   time: string;
+  status: string;
+  tickets: number;
 };
 
 const conversations: Conversation[] = [
@@ -11,18 +13,24 @@ const conversations: Conversation[] = [
     customer: "Anna Svensson",
     message: "I have a problem with my payment.",
     time: "2 min ago",
+    status: "Active",
+    tickets: 3,
   },
   {
     id: 2,
     customer: "John Smith",
     message: "Can you help me with my refund?",
     time: "15 min ago",
+    status: "Active",
+    tickets: 1,
   },
   {
     id: 3,
     customer: "Maria Andersson",
     message: "I can't log into my account.",
     time: "32 min ago",
+    status: "Inactive",
+    tickets: 5,
   },
 ];
 
