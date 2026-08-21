@@ -31,6 +31,12 @@ const customers: Customer[] = [
   },
 ];
 
+const StatusClass = (status: string) => {
+  return status === "Active"
+    ? "text-green-500  bg-green-100"
+    : "text-red-500  bg-red-100  ";
+};
+
 function Customers() {
   const [search, setSearch] = useState("");
 
@@ -66,7 +72,13 @@ function Customers() {
               <tr key={customer.id} className="border-t border-gray-100">
                 <td className="p-4">{customer.name}</td>
                 <td className="p-4">{customer.email}</td>
-                <td className="p-4">{customer.status}</td>
+                <td>
+                  <span
+                    className={`rounded-full px-3 py-1 text-sm   ${StatusClass(customer.status)} `}
+                  >
+                    {customer.status}
+                  </span>
+                </td>
                 <td className="p-4">{customer.tickets}</td>
               </tr>
             ))}
