@@ -6,6 +6,7 @@ import Customers from "./pages/Customers";
 import Conversations from "./pages/Conversations";
 import Tickets from "./pages/Tickets";
 import Settings from "./pages/Settings";
+import CustomerProfile from "./pages/CustomerProfile";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/customers" element={<Customers />} />
+            <Route path="/customers/:id" element={<CustomerProfile />} />
             <Route path="/conversations" element={<Conversations />} />
             <Route path="/tickets" element={<Tickets />} />
             <Route path="/settings" element={<Settings />} />

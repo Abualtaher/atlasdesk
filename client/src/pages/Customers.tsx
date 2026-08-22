@@ -1,35 +1,7 @@
-import { useState } from "react";
-type Customer = {
-  id: number;
-  name: string;
-  email: string;
-  status: string;
-  tickets: number;
-};
+import { Link } from "react-router-dom";
 
-const customers: Customer[] = [
-  {
-    id: 1,
-    name: "Anna Svensson",
-    email: "anna@example.com",
-    status: "Active",
-    tickets: 3,
-  },
-  {
-    id: 2,
-    name: "John Smith",
-    email: "john@example.com",
-    status: "Active",
-    tickets: 1,
-  },
-  {
-    id: 3,
-    name: "Maria Andersson",
-    email: "maria@example.com",
-    status: "Inactive",
-    tickets: 5,
-  },
-];
+import { useState } from "react";
+import { customers } from "../data/customers";
 
 const StatusClass = (status: string) => {
   return status === "Active"
@@ -70,11 +42,13 @@ function Customers() {
           <tbody>
             {filteredCustomers.map((customer) => (
               <tr key={customer.id} className="border-t border-gray-100">
-                <td className="p-4">{customer.name}</td>
+                <td className="p-4">
+                  <Link to={`/customers/${customer.id}`}>{customer.name}</Link>
+                </td>
                 <td className="p-4">{customer.email}</td>
                 <td>
                   <span
-                    className={`rounded-full px-3 py-1 text-sm   ${StatusClass(customer.status)} `}
+                    className={`rounded-full p-4 px-3 py-1 text-sm   ${StatusClass(customer.status)} `}
                   >
                     {customer.status}
                   </span>
