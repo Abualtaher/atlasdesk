@@ -49,10 +49,36 @@ function Conversations() {
   const [selectedConversationId, setSelectedConversationId] = useState(1);
 
   const [newMessage, setNewMessage] = useState("");
+  const [conversationList, setConversationList] = useState(conversations);
 
-  const selectedConversation = conversations.find(
+  const selectedConversation = conversationList.find(
     (conversation) => conversation.id === selectedConversationId,
   );
+
+  const handleSend = () => {
+    if (!newMessage.trim()) {
+      return;
+    }
+    const messageToSend = {
+      id: Date.now(),
+      sender: "agent",
+      text: newMessage,
+    };
+
+    const updatedConversations = conversationList.map((conversation) => {
+      if (conversation.id !== selectedConversationId) {
+        return conversation;
+      }
+
+      return {
+        ...conversation,
+        messages: [...conversation.messages, messageToSend],
+        lastMessage: newMessage,
+      };
+    });
+    setConversationList(updatedConversations);
+    setNewMessage("");
+  };
   return (
     <div>
       <h1 className="text-3xl font-bold">Conversations</h1>
@@ -60,7 +86,7 @@ function Conversations() {
 
       <div className="flex w-full">
         <div className="w-80">
-          {conversations.map((conversation) => (
+          {conversationList.map((conversation) => (
             <div
               className={`p-4 cursor-pointer ${selectedConversationId === conversation.id ? "bg-gray-100" : "bg-white"}`}
               key={conversation.id}
@@ -102,9 +128,16 @@ function Conversations() {
                 type="text"
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    handleSend();
+                  }
+                }}
                 placeholder="Type a message..."
               />
-              <button className="border border-gray-300">Send</button>
+              <button className="border border-gray-300" onClick={handleSend}>
+                Send
+              </button>
             </div>
           </div>
         </div>
