@@ -40,7 +40,7 @@ const conversations: Conversation[] = [
   {
     id: 2,
     customer: "John Smith",
-    subject: "Refund request",
+    subject: "Refund request is needed now",
     lastMessage: "Can you help me wiht refund? Please Help!!!",
     time: "15 min ago",
     messages: [],
