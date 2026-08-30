@@ -13,6 +13,7 @@ type Conversation = {
   lastMessage: string;
   time: string;
   messages: Message[];
+  isRead: boolean;
 };
 
 const conversations: Conversation[] = [
@@ -22,6 +23,7 @@ const conversations: Conversation[] = [
     subject: "Payment problem",
     lastMessage: "I have a problem with my payment.",
     time: "2 min ago",
+    isRead: true,
     messages: [
       {
         id: 1,
@@ -42,6 +44,7 @@ const conversations: Conversation[] = [
     lastMessage: "Can you help me wiht refund?",
     time: "15 min ago",
     messages: [],
+    isRead: false,
   },
 ];
 
@@ -54,6 +57,19 @@ function Conversations() {
   const selectedConversation = conversationList.find(
     (conversation) => conversation.id === selectedConversationId,
   );
+
+  const markAsRead = (conversationId: number) => {
+    const updatConversations = conversationList.map((conversation) => {
+      if (conversation.id !== conversationId) {
+        return conversation;
+      }
+      return {
+        ...conversation,
+        isRead: true,
+      };
+    });
+    setConversationList(updatConversations);
+  };
 
   const handleSend = () => {
     if (!newMessage.trim()) {
@@ -90,7 +106,10 @@ function Conversations() {
             <div
               className={`p-4 cursor-pointer ${selectedConversationId === conversation.id ? "bg-gray-100" : "bg-white"}`}
               key={conversation.id}
-              onClick={() => setSelectedConversationId(conversation.id)}
+              onClick={() => {
+                setSelectedConversationId(conversation.id);
+                markAsRead(conversation.id);
+              }}
             >
               <p> {conversation.customer}</p>
               <p>{conversation.subject}</p>
