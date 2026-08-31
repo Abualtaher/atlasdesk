@@ -43,8 +43,14 @@ const conversations: Conversation[] = [
     subject: "Refund request",
     lastMessage: "Can you help me wiht refund?",
     time: "15 min ago",
-    messages: [],
     isRead: false,
+    messages: [
+      {
+        id: 3,
+        sender: "customer",
+        text: "Hi, I need help with my refund i did not get it yet.",
+      },
+    ],
   },
 ];
 
@@ -111,6 +117,7 @@ function Conversations() {
                 markAsRead(conversation.id);
               }}
             >
+              {conversation.isRead ? null : <span>Unread</span>}
               <p> {conversation.customer}</p>
               <p>{conversation.subject}</p>
               <p>{conversation.lastMessage}</p>
