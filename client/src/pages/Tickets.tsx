@@ -1,6 +1,17 @@
+import { useState } from "react";
 import { tickets } from "../data/tickets";
 
 function Tickets() {
+  const [ticketStatus, setTicketStatus] = useState("All");
+
+  const filteredTickets = tickets.filter((ticket) => {
+    ticket.status.includes(ticketStatus);
+    if (ticketStatus === "All") {
+      return true;
+    }
+    return ticket.status === ticketStatus;
+  });
+
   const priorityClass = (priority: string) => {
     if (priority === "High") {
       return "bg-red-200";
@@ -24,6 +35,15 @@ function Tickets() {
     <div>
       <h1 className="text-3xl font-bold">Tickets</h1>
       <p className="mt-2 text-gray-600">Manage customer support tickets.</p>
+      <select
+        value={ticketStatus}
+        onChange={(e) => setTicketStatus(e.target.value)}
+      >
+        <option value="All">All</option>
+        <option value="Open">Open</option>
+        <option value="Closed">Closed</option>
+        <option value="In Progress">In Progress</option>
+      </select>
       <div>
         <table className="mt-6 w-full overflow-hidden rounded-xl border border-gray-200 bg-white text-left">
           <thead className="bg-gray-50">
@@ -51,7 +71,7 @@ function Tickets() {
           </thead>
 
           <tbody>
-            {tickets.map((ticket) => (
+            {filteredTickets.map((ticket) => (
               <tr key={ticket.id} className="border-t border-gray-200">
                 <td className="px-4 py-4 font-medium">{ticket.title}</td>
 
