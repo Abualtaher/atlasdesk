@@ -4,14 +4,23 @@ import { tickets } from "../data/tickets";
 function Tickets() {
   const [ticketStatus, setTicketStatus] = useState("All");
   const [ticketPriority, setTicketPriority] = useState("All");
+  const [search, setSearch] = useState("");
 
   const filteredTickets = tickets.filter((ticket) => {
     const priorityMatch =
       ticketPriority === "All" || ticket.priority === ticketPriority;
     const statusMatches =
       ticketStatus === "All" || ticket.status === ticketStatus;
-    ticket.status.includes(ticketStatus);
-    return priorityMatch && statusMatches;
+    const titleMatches = ticket.title
+      .toLowerCase()
+      .includes(search.toLowerCase());
+    const customerMatches = ticket.customer
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    const searchMatches = titleMatches || customerMatches;
+
+    return priorityMatch && statusMatches && searchMatches;
   });
 
   const priorityClass = (priority: string) => {
@@ -55,6 +64,15 @@ function Tickets() {
         <option value="Medium">Medium</option>
         <option value="Low">Low</option>
       </select>
+      <div>
+        <input
+          type="text"
+          placeholder="Search tickets..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="mt-6 w-full max-w-md rounded-lg border border-gray-300 bg-white px-4 py-2"
+        />
+      </div>
       <div>
         <table className="mt-6 w-full overflow-hidden rounded-xl border border-gray-200 bg-white text-left">
           <thead className="bg-gray-50">
