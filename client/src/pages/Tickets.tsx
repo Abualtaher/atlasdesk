@@ -73,64 +73,71 @@ function Tickets() {
           className="mt-6 w-full max-w-md rounded-lg border border-gray-300 bg-white px-4 py-2"
         />
       </div>
+
       <div>
-        <table className="mt-6 w-full overflow-hidden rounded-xl border border-gray-200 bg-white text-left">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700">
-                Title
-              </th>
+        {filteredTickets.length === 0 ? (
+          <p>No tickets found....</p>
+        ) : (
+          <table className="mt-6 w-full overflow-hidden rounded-xl border border-gray-200 bg-white text-left">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-4 py-3 text-sm font-semibold text-gray-700">
+                  Title
+                </th>
 
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700">
-                Customer
-              </th>
+                <th className="px-4 py-3 text-sm font-semibold text-gray-700">
+                  Customer
+                </th>
 
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700">
-                Status
-              </th>
+                <th className="px-4 py-3 text-sm font-semibold text-gray-700">
+                  Status
+                </th>
 
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700">
-                Priority
-              </th>
+                <th className="px-4 py-3 text-sm font-semibold text-gray-700">
+                  Priority
+                </th>
 
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700">
-                Created
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {filteredTickets.map((ticket) => (
-              <tr key={ticket.id} className="border-t border-gray-200">
-                <td className="px-4 py-4 font-medium">{ticket.title}</td>
-
-                <td className="px-4 py-4">{ticket.customer}</td>
-
-                <td className="px-4 py-4">
-                  <span
-                    className={`rounded-full px-3 py-1 text-sm font-medium ${statusClass(
-                      ticket.status,
-                    )}`}
-                  >
-                    {ticket.status}
-                  </span>
-                </td>
-
-                <td className="px-4 py-4">
-                  <span
-                    className={`rounded-full px-3 py-1 text-sm font-medium ${priorityClass(
-                      ticket.priority,
-                    )}`}
-                  >
-                    {ticket.priority}
-                  </span>
-                </td>
-
-                <td className="px-4 py-4 text-gray-500">{ticket.createdAt}</td>
+                <th className="px-4 py-3 text-sm font-semibold text-gray-700">
+                  Created
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {filteredTickets.map((ticket) => (
+                <tr key={ticket.id} className="border-t border-gray-200">
+                  <td className="px-4 py-4 font-medium">{ticket.title}</td>
+
+                  <td className="px-4 py-4">{ticket.customer}</td>
+
+                  <td className="px-4 py-4">
+                    <span
+                      className={`rounded-full px-3 py-1 text-sm font-medium ${statusClass(
+                        ticket.status,
+                      )}`}
+                    >
+                      {ticket.status}
+                    </span>
+                  </td>
+
+                  <td className="px-4 py-4">
+                    <span
+                      className={`rounded-full px-3 py-1 text-sm font-medium ${priorityClass(
+                        ticket.priority,
+                      )}`}
+                    >
+                      {ticket.priority}
+                    </span>
+                  </td>
+
+                  <td className="px-4 py-4 text-gray-500">
+                    {ticket.createdAt}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );
