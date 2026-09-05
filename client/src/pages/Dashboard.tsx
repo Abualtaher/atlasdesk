@@ -1,4 +1,4 @@
-import { Ticket, Clock, Users, MessageSquare } from "lucide-react";
+import { Ticket, Clock, Users } from "lucide-react";
 import StatCard from "../components/StatCard";
 import ConversationList from "../components/ConversationList";
 import { tickets } from "../data/tickets";
