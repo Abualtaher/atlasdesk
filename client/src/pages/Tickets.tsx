@@ -3,13 +3,15 @@ import { tickets } from "../data/tickets";
 
 function Tickets() {
   const [ticketStatus, setTicketStatus] = useState("All");
+  const [ticketPriority, setTicketPriority] = useState("All");
 
   const filteredTickets = tickets.filter((ticket) => {
+    const priorityMatch =
+      ticketPriority === "All" || ticket.priority === ticketPriority;
+    const statusMatches =
+      ticketStatus === "All" || ticket.status === ticketStatus;
     ticket.status.includes(ticketStatus);
-    if (ticketStatus === "All") {
-      return true;
-    }
-    return ticket.status === ticketStatus;
+    return priorityMatch && statusMatches;
   });
 
   const priorityClass = (priority: string) => {
@@ -43,6 +45,15 @@ function Tickets() {
         <option value="Open">Open</option>
         <option value="Closed">Closed</option>
         <option value="In Progress">In Progress</option>
+      </select>
+      <select
+        value={ticketPriority}
+        onChange={(e) => setTicketPriority(e.target.value)}
+      >
+        <option value="All">All</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
       </select>
       <div>
         <table className="mt-6 w-full overflow-hidden rounded-xl border border-gray-200 bg-white text-left">
