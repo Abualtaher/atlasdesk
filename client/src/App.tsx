@@ -7,6 +7,7 @@ import Conversations from "./pages/Conversations";
 import Tickets from "./pages/Tickets";
 import Settings from "./pages/Settings";
 import CustomerProfile from "./pages/CustomerProfile";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/conversations" element={<Conversations />} />
             <Route path="/tickets" element={<Tickets />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </main>
       </div>
