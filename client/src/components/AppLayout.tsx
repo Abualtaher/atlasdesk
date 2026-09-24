@@ -180,7 +180,7 @@ function Tickets() {
           </div>
 
           {/* Desktop table */}
-          <div className="mt-6 space-y-3 border-4 border-red-500 md:hidden">
+          <div className="mt-6 hidden overflow-x-auto rounded-xl border border-gray-200 bg-white md:block">
             <table className="w-full min-w-[800px] text-left">
               <thead className="bg-gray-50">
                 <tr>
