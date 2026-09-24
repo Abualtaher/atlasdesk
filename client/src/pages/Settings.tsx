@@ -13,12 +13,14 @@ function Settings() {
   return (
     <div className="mx-auto max-w-3xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
+        <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+          Settings
+        </h1>
         <p className="mt-2 text-gray-600">Manage your AtlasDesk settings.</p>
       </div>
 
       <div className="space-y-6">
-        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+        <section className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-6 shadow-sm">
           <div className="mb-5">
             <h2 className="text-lg font-semibold text-gray-900">Profile</h2>
             <p className="mt-1 text-sm text-gray-500">
@@ -27,7 +29,7 @@ function Settings() {
           </div>
 
           <div className="space-y-4">
-            <div>
+            <div className="min-w-0 pr-4">
               <label className="mb-2 block text-sm font-medium text-gray-700">
                 Name
               </label>
@@ -39,7 +41,7 @@ function Settings() {
               />
             </div>
 
-            <div>
+            <div className="min-w-0 pr-4">
               <label className="mb-2 block text-sm font-medium text-gray-700">
                 Email
               </label>
@@ -53,7 +55,7 @@ function Settings() {
           </div>
         </section>
 
-        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+        <section className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-6 shadow-sm">
           <div className="mb-5">
             <h2 className="text-lg font-semibold text-gray-900">Preferences</h2>
             <p className="mt-1 text-sm text-gray-500">
@@ -74,7 +76,7 @@ function Settings() {
                 type="checkbox"
                 checked={emailNotifications}
                 onChange={(e) => setEmailNotifications(e.target.checked)}
-                className="h-5 w-5 rounded border-gray-300"
+                className="h-5 w-5 shrink-0 rounded border-gray-300"
               />
             </label>
 
@@ -90,13 +92,13 @@ function Settings() {
                 type="checkbox"
                 checked={darkMode}
                 onChange={(e) => setDarkMode(e.target.checked)}
-                className="h-5 w-5 rounded border-gray-300"
+                className="h-5 w-5 shrink-0 rounded border-gray-300"
               />
             </label>
           </div>
         </section>
 
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             {saved && (
               <p className="text-sm font-medium text-green-700">
@@ -107,7 +109,7 @@ function Settings() {
 
           <button
             onClick={handleSave}
-            className="rounded-lg bg-gray-900 px-5 py-3 font-medium text-white transition hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+            className="rounded-lg bg-gray-900 w-full sm:w-auto px-5 py-3 font-medium text-white transition hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
           >
             Save Settings
           </button>
