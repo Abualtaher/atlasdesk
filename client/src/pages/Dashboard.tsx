@@ -26,13 +26,15 @@ function Dashboard() {
   return (
     <div>
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+        <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+          Dashboard
+        </h1>
         <p className="mt-1 text-gray-600">
           Here's what's happening with your customers today.
         </p>
       </div>
 
-      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 xl:grid-cols-3">
         <StatCard
           title="Total Tickets"
           value={totalTickets}
@@ -70,7 +72,7 @@ function Dashboard() {
         />
       </div>
 
-      <div className="mt-8">
+      <div className="mt-6 sm:mt-8">
         <ConversationList />
       </div>
     </div>

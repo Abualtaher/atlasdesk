@@ -37,7 +37,7 @@ const conversations: Conversation[] = [
 function ConversationList() {
   return (
     <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
-      <div className="border-b border-gray-200 p-6">
+      <div className="border-b border-gray-200 p-4 sm:p-6">
         <h2 className="text-lg font-semibold text-gray-900">
           Recent Conversations
         </h2>
@@ -47,19 +47,21 @@ function ConversationList() {
         {conversations.map((conversation) => (
           <div
             key={conversation.id}
-            className="flex items-center justify-between border-b border-gray-100 p-6 last:border-b-0"
+            className="flex flex-col gap-3 border-b border-gray-100 p-4 last:border-b-0 sm:flex-row sm:items-center sm:justify-between sm:p-6"
           >
-            <div>
+            <div className="min-w-0">
               <p className="font-medium text-gray-900">
                 {conversation.customer}
               </p>
 
-              <p className="mt-1 text-sm text-gray-500">
+              <p className="mt-1 break-words text-sm text-gray-500">
                 {conversation.message}
               </p>
             </div>
 
-            <span className="text-sm text-gray-400">{conversation.time}</span>
+            <span className="shrink-0 text-sm text-gray-400">
+              {conversation.time}
+            </span>
           </div>
         ))}
       </div>
