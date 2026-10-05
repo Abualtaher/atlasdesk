@@ -5,13 +5,16 @@ import Sidebar from "./Sidebar";
 
 function AppLayout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   const handleCloseMenu = () => {
     setMobileMenuOpen(false);
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div
+      className={`flex min-h-screen ${darkMode ? "bg-gray-900" : "bg-gray-100"}`}
+    >
       <Sidebar isOpen={mobileMenuOpen} onClose={handleCloseMenu} />
 
       {mobileMenuOpen && (
@@ -30,7 +33,7 @@ function AppLayout() {
           <Menu size={22} />
         </button>
 
-        <Outlet />
+        <Outlet context={{ darkMode, setDarkMode }} />
       </main>
     </div>
   );

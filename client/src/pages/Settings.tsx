@@ -1,10 +1,16 @@
 import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
+type OutletContext = {
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+};
 function Settings() {
+  const { darkMode, setDarkMode } = useOutletContext<OutletContext>();
   const [userName, setUserName] = useState("Alex Johnson");
   const [email, setEmail] = useState("alex@atlasdesk.com");
   const [emailNotifications, setEmailNotifications] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
+
   const [saved, setSaved] = useState(false);
 
   const handleSave = () => {
@@ -12,7 +18,9 @@ function Settings() {
   };
 
   return (
-    <div className="mx-auto max-w-3xl">
+    <div
+      className={`mx-auto max-w-3*1 ${darkMode ? "bg-gray-900" : "bg-white"}`}
+    >
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
           Settings
