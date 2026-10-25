@@ -8,14 +8,20 @@ type StatCardProps = {
 
 function StatCard({ title, value, icon }: StatCardProps) {
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+    <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-colors dark:border-gray-700 dark:bg-gray-800">
       <div className="flex items-center justify-between">
-        <p className="text-sm font-medium text-gray-500">{title}</p>
+        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+          {title}
+        </p>
 
-        <div className="rounded-lg bg-gray-100 p-2 text-gray-600">{icon}</div>
+        <div className="rounded-lg bg-gray-100 p-2 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+          {icon}
+        </div>
       </div>
 
-      <p className="mt-4 text-3xl font-bold text-gray-900">{value}</p>
+      <p className="mt-4 text-3xl font-bold text-gray-900 dark:text-white">
+        {value}
+      </p>
     </div>
   );
 }
