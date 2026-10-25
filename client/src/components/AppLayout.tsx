@@ -12,29 +12,29 @@ function AppLayout() {
   };
 
   return (
-    <div
-      className={`flex min-h-screen ${darkMode ? "bg-gray-900" : "bg-gray-100"}`}
-    >
-      <Sidebar isOpen={mobileMenuOpen} onClose={handleCloseMenu} />
+    <div className={darkMode ? "dark" : ""}>
+      <div className="flex min-h-screen bg-gray-100 dark:bg-gray-950">
+        <Sidebar isOpen={mobileMenuOpen} onClose={handleCloseMenu} />
 
-      {mobileMenuOpen && (
-        <div
-          className="fixed inset-0 z-30 bg-black/40 md:hidden"
-          onClick={handleCloseMenu}
-        />
-      )}
+        {mobileMenuOpen && (
+          <div
+            className="fixed inset-0 z-30 bg-black/40 md:hidden"
+            onClick={handleCloseMenu}
+          />
+        )}
 
-      <main className="min-w-0 flex-1 p-4 md:p-8">
-        <button
-          onClick={() => setMobileMenuOpen(true)}
-          className="mb-4 rounded-lg bg-white p-2 text-gray-700 shadow-sm md:hidden"
-          aria-label="Open menu"
-        >
-          <Menu size={22} />
-        </button>
+        <main className="min-w-0 flex-1 p-4 md:p-8">
+          <button
+            onClick={() => setMobileMenuOpen(true)}
+            className="mb-4 rounded-lg bg-white p-2 text-gray-700 shadow-sm md:hidden dark:bg-gray-800 dark:text-white"
+            aria-label="Open menu"
+          >
+            <Menu size={22} />
+          </button>
 
-        <Outlet context={{ darkMode, setDarkMode }} />
-      </main>
+          <Outlet context={{ darkMode, setDarkMode }} />
+        </main>
+      </div>
     </div>
   );
 }

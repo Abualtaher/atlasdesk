@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import {
   LayoutDashboard,
@@ -6,8 +6,8 @@ import {
   MessageSquare,
   Ticket,
   Settings,
+  X,
 } from "lucide-react";
-import { X } from "lucide-react";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -15,6 +15,22 @@ type SidebarProps = {
 };
 
 function Sidebar({ isOpen, onClose }: SidebarProps) {
+  const location = useLocation();
+
+  const linkClass = (path: string) => {
+    const isActive =
+      path === "/"
+        ? location.pathname === "/"
+        : location.pathname === path ||
+          location.pathname.startsWith(`${path}/`);
+
+    return `flex items-center gap-3 rounded-lg px-3 py-2 transition-colors ${
+      isActive
+        ? "bg-slate-800 text-white"
+        : "text-slate-300 hover:bg-slate-800 hover:text-white"
+    }`;
+  };
+
   return (
     <aside
       className={`fixed inset-y-0 left-0 z-40 flex w-64 flex-col bg-slate-900 p-4 text-white transition-transform duration-300 md:static md:translate-x-0 ${
@@ -34,18 +50,14 @@ function Sidebar({ isOpen, onClose }: SidebarProps) {
       </div>
 
       <nav className="space-y-2">
-        <Link
-          to="/"
-          className="flex items-center gap-3 px-3 py-2 rounded-lg bg-slate-800"
-          onClick={onClose}
-        >
+        <Link to="/" className={linkClass("/")} onClick={onClose}>
           <LayoutDashboard size={20} />
           Dashboard
         </Link>
 
         <Link
           to="/customers"
-          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800"
+          className={linkClass("/customers")}
           onClick={onClose}
         >
           <Users size={20} />
@@ -54,18 +66,14 @@ function Sidebar({ isOpen, onClose }: SidebarProps) {
 
         <Link
           to="/conversations"
-          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800"
+          className={linkClass("/conversations")}
           onClick={onClose}
         >
           <MessageSquare size={20} />
           Conversations
         </Link>
 
-        <Link
-          to="/tickets"
-          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800"
-          onClick={onClose}
-        >
+        <Link to="/tickets" className={linkClass("/tickets")} onClick={onClose}>
           <Ticket size={20} />
           Tickets
         </Link>
@@ -74,7 +82,7 @@ function Sidebar({ isOpen, onClose }: SidebarProps) {
       <div className="mt-auto">
         <Link
           to="/settings"
-          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800"
+          className={linkClass("/settings")}
           onClick={onClose}
         >
           <Settings size={20} />
