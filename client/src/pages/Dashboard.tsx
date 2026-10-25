@@ -23,17 +23,21 @@ function Dashboard() {
   const numberOfInProgressTickets = tickets.filter(
     (ticket) => ticket.status === "In Progress",
   ).length;
+
   return (
-    <div>
+    <div className="min-w-0">
+      {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">
           Dashboard
         </h1>
-        <p className="mt-1 text-gray-600">
+
+        <p className="mt-1 text-gray-600 dark:text-gray-400">
           Here's what's happening with your customers today.
         </p>
       </div>
 
+      {/* Statistics */}
       <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 xl:grid-cols-3">
         <StatCard
           title="Total Tickets"
@@ -72,6 +76,7 @@ function Dashboard() {
         />
       </div>
 
+      {/* Recent Conversations */}
       <div className="mt-6 sm:mt-8">
         <ConversationList />
       </div>
