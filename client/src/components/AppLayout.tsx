@@ -56,6 +56,15 @@ function AppLayout() {
     setNotifications(updatedNotifications);
   };
 
+  const markAllAsRead = () => {
+    const updatedNotifications = notifications.map((notification) => ({
+      ...notification,
+      isRead: true,
+    }));
+
+    setNotifications(updatedNotifications);
+  };
+
   return (
     <div className={darkMode ? "dark" : ""}>
       <div className="flex min-h-screen bg-gray-100 dark:bg-gray-950">
@@ -69,24 +78,26 @@ function AppLayout() {
         )}
 
         <main className="min-w-0 flex-1 p-4 md:p-8">
-          <div className="mb-4 flex items-center justify-between">
+          {/* Top bar */}
+          <div className="mb-6 flex items-center justify-between">
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="rounded-lg bg-white p-2 text-gray-700 shadow-sm md:hidden dark:bg-gray-800 dark:text-white"
+              className="rounded-lg bg-white p-2 text-gray-700 shadow-sm transition hover:bg-gray-50 md:hidden dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
               aria-label="Open menu"
             >
               <Menu size={22} />
             </button>
 
+            {/* Notification bell and dropdown */}
             <div className="relative ml-auto">
               <button
-                className="relative rounded-lg bg-white p-2 text-gray-700 shadow-sm dark:bg-gray-800 dark:text-white"
+                className="relative rounded-lg bg-white p-2 text-gray-700 shadow-sm transition hover:bg-gray-50 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
                 aria-label="Notifications"
                 aria-expanded={notificationOpen}
                 onClick={() => setNotificationOpen(!notificationOpen)}
               >
                 {unreadCount > 0 && (
-                  <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs text-white">
+                  <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs font-semibold text-white">
                     {unreadCount}
                   </span>
                 )}
@@ -95,19 +106,30 @@ function AppLayout() {
               </button>
 
               {notificationOpen && (
-                <div className="absolute right-0 top-12 z-50 w-80 max-w-[calc(100vw-2rem)] rounded-lg border border-gray-200 bg-white p-4 shadow-lg dark:border-gray-700 dark:bg-gray-800">
-                  <div className="mb-3 flex items-center justify-between">
+                <div className="absolute right-0 top-12 z-50 w-80 max-w-[calc(100vw-2rem)] rounded-xl border border-gray-200 bg-white p-4 shadow-xl dark:border-gray-700 dark:bg-gray-800">
+                  {/* Dropdown header */}
+                  <div className="mb-3 flex items-center justify-between gap-3">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                       Notifications
                     </h3>
 
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      {unreadCount} unread
-                    </span>
+                    {unreadCount > 0 ? (
+                      <button
+                        onClick={markAllAsRead}
+                        className="shrink-0 text-xs font-medium text-blue-600 transition hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                      >
+                        Mark all as read
+                      </button>
+                    ) : (
+                      <span className="shrink-0 text-xs text-gray-500 dark:text-gray-400">
+                        All caught up
+                      </span>
+                    )}
                   </div>
 
+                  {/* Notification list */}
                   {notifications.length === 0 ? (
-                    <p className="py-4 text-center text-sm text-gray-500 dark:text-gray-400">
+                    <p className="py-6 text-center text-sm text-gray-500 dark:text-gray-400">
                       You're all caught up!
                     </p>
                   ) : (
@@ -149,6 +171,7 @@ function AppLayout() {
             </div>
           </div>
 
+          {/* Current page */}
           <Outlet context={{ darkMode, setDarkMode }} />
         </main>
       </div>

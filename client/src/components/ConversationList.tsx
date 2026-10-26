@@ -32,6 +32,22 @@ const conversations: Conversation[] = [
     status: "Inactive",
     tickets: 5,
   },
+  {
+    id: 4,
+    customer: "David Johnson",
+    message: "I need assistance with my order.",
+    time: "1 hour ago",
+    status: "Active",
+    tickets: 2,
+  },
+  {
+    id: 5,
+    customer: "Emma Johansson",
+    message: "My account has been locked.",
+    time: "2 hours ago",
+    status: "Inactive",
+    tickets: 4,
+  },
 ];
 
 function ConversationList() {

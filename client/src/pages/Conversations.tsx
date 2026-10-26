@@ -50,6 +50,16 @@ const conversations: Conversation[] = [
         sender: "customer",
         text: "Hi, I need help with my refund i did not get it yet.",
       },
+      {
+        id: 4,
+        sender: "customer",
+        text: "I need to Go home.",
+      },
+      {
+        id: 4,
+        sender: "customer",
+        text: "I need to Go home!!!!!.",
+      },
     ],
   },
 ];
